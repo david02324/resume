@@ -357,62 +357,113 @@ em { font-style: normal; color: var(--accent-2); font-weight: 600; }
 }
 
 /* ============================================================
-   PRINT  →  clean light A4 resume
+   PRINT  →  dense, self-contained 1-page A4 resume
+   Two-column flow, independent of the on-screen layout.
    ============================================================ */
 @media print {
-  @page { size: A4; margin: 14mm 14mm; }
+  @page { size: A4; margin: 8mm 9mm; }
 
   :root {
     --bg: #fff; --bg-grid: transparent;
     --panel: #fff; --panel-2: #fff;
-    --line: #d4d4d4; --line-soft: #e4e4e4;
-    --ink: #111; --ink-2: #2c2c2c; --muted: #666; --faint: #999;
+    --line: #d4d4d4; --line-soft: #e6e6e6;
+    --ink: #111; --ink-2: #303030; --muted: #6b6b6b; --faint: #aaa;
     --accent: #b3640a; --accent-2: #8a4d06; --link: #185f66; --good: #2f7d46;
   }
 
   html, body {
     background: #fff !important; color: #111;
     background-image: none !important;
-    padding: 0; margin: 0; font-size: 10.3pt; line-height: 1.5;
+    padding: 0; margin: 0;
+    font-size: 8pt; line-height: 1.34; letter-spacing: 0;
   }
 
-  .actionbar { display: none !important; }
-  .hero__caret { display: none; }
+  .actionbar, .hero__caret, .hero__prompt, .hero__window, .foot { display: none !important; }
 
   .sheet {
     max-width: none; border: 0; border-radius: 0;
     box-shadow: none; background: #fff !important;
+    /* two-column newspaper flow keeps everything on one page */
+    columns: 2; column-gap: 7mm;
   }
 
-  /* hide the terminal chrome on paper */
-  .hero__window { display: none; }
-  .hero { border-bottom: 1.5px solid #111; }
-  .hero__body { padding: 0 0 .7rem; }
-  .hero__name { font-size: 26pt; color: #111; }
-  .hero__role { color: var(--accent); margin-top: .3rem; }
-  .hero__prompt { display: none; }
-  .hero__tagline { font-size: 9.6pt; margin-top: .7rem; }
-  .hero__tagline--dim { font-size: 9.2pt; }
-  .hero__contacts { margin-top: 1rem; gap: .25rem 1.5rem; }
-  .hero__contacts li { border-bottom: 0; padding-bottom: .1rem; font-size: 8.8pt; }
+  /* ---- hero spans both columns ---- */
+  .hero {
+    column-span: all; border-bottom: 1.4px solid #111;
+    padding-bottom: 5pt; margin-bottom: 7pt;
+  }
+  .hero__body { padding: 0; }
+  .hero__name { font-size: 20pt; line-height: 1; color: #111; }
+  .hero__role { font-size: 8pt; letter-spacing: .22em; margin-top: 3pt; }
+  .hero__tagline { font-size: 8pt; margin-top: 5pt; max-width: 100%; }
+  .hero__tagline--dim { font-size: 8pt; margin-top: 2pt; }
+  .hero__contacts {
+    margin-top: 6pt; gap: 1pt 14pt; max-width: 100%;
+    grid-template-columns: repeat(3, auto); justify-content: start;
+  }
+  .hero__contacts li { border-bottom: 0; padding-bottom: 0; font-size: 7.6pt; gap: 5pt; }
+  .hero__contacts .k { min-width: 0; font-size: 6.4pt; }
   .hero__contacts a { color: #111; }
 
-  .block { grid-template-columns: 1fr; }
-  .block__head { padding: .8rem 0 .35rem; border-bottom: 1px solid #ddd; margin-bottom: .6rem; }
-  .block__no { color: var(--accent); border-color: #ccc; background: #fff; }
-  .block__body { padding: 0; }
+  /* ---- sections flow inside the two columns ---- */
+  .block {
+    display: block; grid-template-columns: none;
+    border: 0; margin-bottom: 6pt;
+    break-inside: avoid; page-break-inside: avoid;   /* small blocks stay whole */
+  }
+  #projects, #career { break-inside: auto; page-break-inside: auto; } /* tall blocks may flow */
 
-  .chip { background: #fff; border: 1px solid #bbb; color: #222; }
+  .block__head {
+    display: flex; padding: 0 0 2.5pt; margin-bottom: 4pt; gap: 5pt;
+    border-bottom: 1px solid #ccc; break-after: avoid;
+  }
+  .block__no { font-size: 6.4pt; padding: 0 4pt; color: var(--accent); border-color: #ccc; background: #fff; }
+  .block__title { font-size: 10pt; }
+  .block__body { display: block; padding: 0; }
+
+  /* skills */
+  .chips { gap: 3pt; }
+  .chip { font-size: 7.4pt; padding: 1.5pt 5pt; background: #fff; border: 1px solid #bbb; color: #222; }
   .chip--strong { box-shadow: none; border-color: var(--accent); }
+  .chip--sep { margin-left: 5pt; }
 
-  .metric { background: #fafafa; border: 1px solid #ccc; border-left: 2px solid var(--accent); }
-  .metric__num { color: var(--accent); }
+  /* career / education — drop the timeline rail to save width */
+  .job { display: block; }
+  .job + .job { margin-top: 5pt; }
+  .job__rail { display: none; }
+  .job__org { font-size: 9.5pt; }
+  .job__period { font-size: 7pt; }
+  .job__pos { font-size: 8pt; margin-top: 1pt; }
+  .job__pos + .job__pos { margin-top: 3pt; }
+  .tag { font-size: 6.4pt; padding: 0 3pt; margin-left: 3pt; }
+  .job__points, .proj__points { margin-top: 2pt; }
+  .job__points li, .proj__points li { font-size: 7.9pt; margin-top: 1pt; padding-left: 8pt; }
+  .job__points li::before, .proj__points li::before { font-size: 6pt; top: 1.5pt; }
 
-  a { color: #111; text-decoration: none; }
+  /* projects */
+  .proj { padding: 4pt 0; break-inside: avoid; page-break-inside: avoid; }
+  .proj:first-child { padding-top: 0; }
+  .proj__title { font-size: 8.7pt; padding-left: 8pt; }
+  .proj__period { font-size: 7pt; }
+  .proj__link { margin-top: 3pt; font-size: 7.2pt; }
   .proj__link a, .note a { color: var(--link); }
 
-  /* avoid awkward page breaks */
-  .block, .job, .proj, .metric, .note { break-inside: avoid; page-break-inside: avoid; }
-  .block__head { break-after: avoid; }
-  .foot { display: none; }
+  .metrics { gap: 4pt; margin-top: 4pt; }
+  .metric {
+    flex: 1 1 0; min-width: 0; padding: 3pt 6pt;
+    background: #fafafa; border: 1px solid #ccc; border-left: 2px solid var(--accent);
+  }
+  .metric__num { font-size: 12pt; color: var(--accent); }
+  .metric__unit { font-size: 7.5pt; }
+  .metric__lab { font-size: 6.4pt; margin-top: 1pt; }
+
+  /* experience notes */
+  .note + .note { margin-top: 4pt; }
+  .note__title { font-size: 8.4pt; }
+  .note p { font-size: 7.9pt; }
+
+  a { color: #111; text-decoration: none; }
+
+  /* keep atomic items from splitting across columns */
+  .job, .proj, .metric, .note, .block__head { break-inside: avoid; page-break-inside: avoid; }
 }
