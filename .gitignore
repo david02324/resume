@@ -1,6 +1,7 @@
 # dev / preview artifacts
 .playwright-mcp/
+# OG share image is committed; ignore all other PNGs (render artifacts)
 *.png
-!og.png          # OG share image — keep this one
+!og.png
 preview.pdf
 .DS_Store
