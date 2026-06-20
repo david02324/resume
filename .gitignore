@@ -1,0 +1,5 @@
+# dev / preview artifacts
+.playwright-mcp/
+*.png
+preview.pdf
+.DS_Store
