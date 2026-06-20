@@ -1,5 +1,6 @@
 # dev / preview artifacts
 .playwright-mcp/
 *.png
+!og.png          # OG share image — keep this one
 preview.pdf
 .DS_Store

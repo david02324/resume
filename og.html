@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<!-- OG image template. Rendered to og.png at 1200×630 via Playwright. -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #0c0f14; --panel: #11151c; --panel-2: #161b24;
+    --line: #222a35; --ink: #e7edf5; --ink-2: #aab4c2; --muted: #69727f;
+    --accent: #f5a637; --accent-2: #ffc77a; --link: #6cc0c8; --good: #7bd88f;
+    --mono: "IBM Plex Mono", monospace;
+    --sans: "IBM Plex Sans KR", sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body { width: 1200px; height: 630px; }
+  body {
+    background:
+      radial-gradient(130% 90% at 100% 0%, rgba(245,166,55,.07), transparent 55%),
+      linear-gradient(rgba(255,255,255,.022) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.022) 1px, transparent 1px),
+      var(--bg);
+    background-size: auto, 30px 30px, 30px 30px, auto;
+    font-family: var(--sans);
+    color: var(--ink);
+    display: flex; padding: 46px;
+  }
+
+  .win {
+    flex: 1;
+    background:
+      radial-gradient(120% 80% at 0% 0%, rgba(245,166,55,.05), transparent 60%),
+      var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    box-shadow: 0 1px 0 rgba(255,255,255,.04) inset, 0 40px 90px -40px rgba(0,0,0,.8);
+    overflow: hidden;
+    display: flex; flex-direction: column;
+  }
+
+  .bar {
+    display: flex; align-items: center; gap: 10px;
+    padding: 18px 26px;
+    background: var(--panel-2);
+    border-bottom: 1px solid var(--line);
+    font-family: var(--mono);
+  }
+  .dot { width: 15px; height: 15px; border-radius: 50%; }
+  .r { background: #ff5f57; } .y { background: #febc2e; } .g { background: #28c840; }
+  .path { margin-left: 14px; font-size: 18px; color: var(--muted); letter-spacing: .02em; }
+
+  .body { flex: 1; padding: 44px 56px; display: flex; flex-direction: column; }
+
+  .prompt { font-family: var(--mono); font-size: 22px; color: var(--muted); letter-spacing: .04em; }
+  .prompt .sig { color: var(--good); margin-right: 14px; }
+
+  .name {
+    font-family: var(--mono); font-weight: 600;
+    font-size: 118px; line-height: 1; letter-spacing: -.01em;
+    margin-top: 6px; color: #fff;
+  }
+  .name .caret { color: var(--accent); font-weight: 400; }
+
+  .role {
+    font-family: var(--mono); font-size: 27px; letter-spacing: .32em;
+    text-transform: uppercase; color: var(--accent); margin-top: 20px; padding-left: 3px;
+  }
+
+  .tagline { margin-top: 26px; font-size: 27px; color: var(--ink-2); }
+  .tagline b { color: var(--ink); font-weight: 600; }
+
+  .spacer { flex: 1; }
+
+  .badges { display: flex; gap: 16px; margin-bottom: 20px; }
+  .badge {
+    font-family: var(--mono); font-size: 23px;
+    padding: 10px 20px; border-radius: 11px;
+    background: var(--panel-2); border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    color: var(--accent-2); font-weight: 500;
+  }
+
+  .contacts {
+    display: flex; align-items: center; gap: 22px;
+    font-family: var(--mono); font-size: 22px; color: var(--muted);
+    border-top: 1px dashed var(--line); padding-top: 22px;
+  }
+  .contacts .lit { color: var(--link); }
+  .contacts .sep { color: var(--line); }
+</style>
+</head>
+<body>
+  <div class="win">
+    <div class="bar">
+      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      <span class="path">~/jangdawit/resume.md</span>
+    </div>
+    <div class="body">
+      <p class="prompt"><span class="sig">$</span>whoami</p>
+      <h1 class="name">장다윗<span class="caret">_</span></h1>
+      <p class="role">Backend Engineer</p>
+      <p class="tagline"><b>지속적인 개발</b>을 지향하는 백엔드 개발자</p>
+
+      <div class="spacer"></div>
+
+      <div class="badges">
+        <span class="badge">1.9억 events / day</span>
+        <span class="badge">−98% traffic</span>
+        <span class="badge">node-redis contributor</span>
+      </div>
+      <div class="contacts">
+        <span class="lit">resume.jangdaw.it</span>
+        <span class="sep">·</span>
+        <span>github.com/david02324</span>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
